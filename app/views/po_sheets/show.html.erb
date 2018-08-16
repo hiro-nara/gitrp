@@ -1,0 +1,131 @@
+<div>
+<%= link_to '[Top]', "/login/index"%> &nbsp;&nbsp;
+<%= link_to 'ログアウト', destroy_account_session_path, method: :delete %>&nbsp;&nbsp;
+<%#= current_account.id == @sheet.author_id ? "あなたのシート" : ""%>
+</div>
+
+<% @mode == :edit ? @fix = false : @fix = true %>
+<h1>個人目標 兼 業績シート
+<%= @sheet.sheet_type%>用
+【<%=@sheet.status%>】
+<%= @fix ?  "" : "＜編集中＞" %> </h1>
+
+<%status_arr = [
+  "目標作成中",
+  "目標上長確認中",
+  "目標人事確認中",
+  "実施中",
+  "結果入力中",
+  "結果上長確認中",
+  "すり合わせ",
+  "結果人事確認中",
+  "完了",
+  "廃止",]%>
+
+<%unless @fix  %>
+  <%= form_for(@sheet, url:{cotroller: "po_sheets", action: "save"}) do |sts|%>
+    ステータス変更  :
+    <%= sts.select(:status, options_for_select(status_arr, :selected => @sheet.status))%>
+    <%= sts.submit("変更") %>
+  <% end %>
+<%end%>
+
+<%= form_for(@sheet, url:{cotroller: "po_sheets", action: "save"}) do |form| %>
+
+<%if @fix  %>
+  <a href="/po_sheets/show/<%= params[:id] + "/edit" %>"> [編集]</a>
+<%else%>
+  <a href="/po_sheets/show/<%= params[:id] %>">[戻る]</a>&nbsp;&nbsp; <%= form.submit("保 存",) %>
+<%end%>
+
+<br>
+
+<table style = "table-layout: fixed; width: 1200px;" class="pos">
+  <tbody>
+    <tr class="pos">
+      <td class="pos" style="width: 400px;">
+        <%= render partial: 'authorinfo', locals:{:form => form} %></td>
+      <td class="pos" style="width: 400px;">
+        <%= render partial: 'changeinfo', locals:{:form => form} %></td>
+      <td class="pos">
+        <%if @sheet.sheet_type =="定量" %>
+        <%= render partial: 'plan_resultinfo' , locals:{:form => form} %>
+        <%end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="pos" colspan="3">
+        <%= render partial: 'objectives_info' , locals:{:form => form} %>
+      </td>
+    </tr>
+
+
+    <tr class="pos">
+      <td class="pos" colspan = "2">
+
+        <div style = "display:table-row">
+          <div style = "display:table-cell; vertical-align:">
+            <table style="display">
+              <tbody>
+                <tr><th style="text-align: left;">
+                  【特記事項】業務を遂行する中で、その結果に
+                    <br>大きく影響を及ぼした環境要因があれば記入
+                </th></tr>
+                <tr><td>
+                  <%= form.text_area(
+                    :notices,
+                    :value => @sheet.notices,
+                    :disabled => @fix ) %>
+                </td></tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div style = "display:table-cell; vertical-align: top; padding-left: 20px;">
+            <table>
+              <tbody>
+                <tr>
+                  <th style="width:50px">難易度</th><th style="width:40px">乗率</th><th>基準</th>
+                  <th colspan="2">評価およびポイント</th>
+                </tr>
+                <tr>
+                  <td class="center">H</td><td class="center">1.2</td>
+                  <td>現グレードの水準を超える目標 </td>
+                  <td>◎：大幅に目標を達成している</td>
+                  <td class="center">120</td>
+                </tr>
+                <tr>
+                  <td class="center">M</td><td class="center">1.0</td>
+                  <td>グレードに見合った目標</td>
+                  <td>〇：目標を達成している</td>
+                  <td class="center">100</td>
+                </tr>
+                <tr>
+                  <td class="center">Ⅼ</td><td class="center">0.8</td>
+                  <td>現グレードの水準を下回る目標</td>
+                  <td>△：目標に達成していない</td>
+                  <td class="center">50</td>
+                </tr>
+                <tr>
+                  <td colspan="3">※大幅達成の目安は120％以上の成果</td>
+                  <td>▲：大幅に目標を達成していない</td>
+                  <td class="center">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      <td class="pos">
+        <%= render partial: 'evaluatorinfo', locals:{:form => form} %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<% end %>
+<br>
+

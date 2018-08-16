@@ -1,0 +1,73 @@
+<div><%= link_to 'ログアウト', destroy_account_session_path, method: :delete %></div>
+<h1>業績目標管理システム 【人事】</h1>
+
+<% dep_2nd_list = @staff.pluck(:dep_2nd).uniq %>
+<% bunshitsu_list = @staff.pluck(:dep_bunshitsu).uniq %>
+
+<%#=@konki_sheet%>
+
+
+前期：<%= @season.find(1).nen_ki %>
+・・・今期：<%= @season.find(2).nen_ki %>
+<br>
+
+<div style = "display: inline;">
+  <%= form_tag(controller: "login", action:"chg_nenki") do %>
+    年度 期を変更する  :
+    <%= select_tag("nen", options_for_select(2010...2050, :selected => @season.find(2).year))%>年度
+    <%= select_tag("ki",  options_for_select(["上","下"], :selected => @season.find(2).period))%>期
+    <%= submit_tag("変更") %>
+  <% end %>
+</div>
+
+<%if @konki_sheet.first %>
+  <%= form_tag(controller: "sheet_manage", action:"haihu") do %>
+  <%= submit_tag("シートを配布する") %>
+  <% end %>
+<%else %>
+  <%= form_tag(controller: "sheet_manage", action:"create_all") do %>
+  <%= submit_tag("シートを作る") %>
+  <% end %>
+
+<% end %>
+
+  <%= form_tag(controller: "sheet_manage", action:"del") do %>
+  <%= submit_tag("削除") %>  <% end %>
+
+<hr>
+
+<table>
+<tbody>
+  <tr>
+    <th>部</th><th>事業部</th><th>社員番号</th><th>氏名</th>
+    <th>職能</th><th style = "width:50px">ｸﾞﾚｰﾄﾞ</th><th>役職</th><th>前期</th><th>今期</th>
+  </tr>
+
+  <% @staff.each do |stf| %>
+  <tr>
+    <td class = "m"><%= stf.dep_2nd %></td>
+    <td class = "m"><%= stf.dep_bunshitsu %></td>
+    <td class = "m"><%= stf.staff_no %></td>
+    <td class = "m"><%= stf.name %></td>
+    <td class = "m"><%= stf.tokyu %></td>
+    <td class = "m center"><%= stf.grade %></td>
+    <td class = "m"><%= stf.position %></td>
+    <td class = "m">
+      <%= @zenki_sheet.exists?(author_id: stf.id) ?
+            link_to(
+            @zenki_sheet.find_by(author_id: stf.id).status,
+            "/po_sheets/show/" + @zenki_sheet.find_by(author_id: stf.id).id.to_s)
+            : "---" %>
+    </td>
+
+    <td class = "m">
+      <%= @konki_sheet.exists?(author_id: stf.id) ?
+            link_to(
+            @konki_sheet.find_by(author_id: stf.id).status,
+            "/po_sheets/show/" + @konki_sheet.find_by(author_id: stf.id).id.to_s)
+            : "---" %>
+    </td>
+  </tr>
+  <% end %>
+</tbody>
+</table>

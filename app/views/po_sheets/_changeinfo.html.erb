@@ -1,0 +1,35 @@
+<table style="margin-left: 30px;">
+	<tbody>
+		<tr>
+			<th>変更後<br>ｸﾞﾚｰﾄﾞ</th>
+			<td style="width: 50px;">
+				<% if @fix == true %>
+					<%= @sheet.grade_c %>
+				<% else %>
+					<%= form.select(:grade_c,
+						1..10,
+						{:include_blank => true},
+						{:value => @sheet.grade_c,
+						:disabled => @fix }
+					) %>
+				<% end %>
+
+			<td style="width: 250px;"></td>
+		</tr>
+		<tr>
+			<th>ｸﾞﾚｰﾄﾞの<br>変更理由</th>
+			<td colspan="2">
+				<%= form.text_field(:grade_reason,
+				  :value => @sheet.grade_reason,
+					:disabled => @fix ) %>
+			</td>
+
+		</tr>
+		<tr>
+			<th>評価時点<br>の所属</th>
+			<td colspan="2"><%= form.text_field(:department, :value => @sheet.department, :disabled => @fix) %></td>
+
+		</tr>
+	</tbody>
+</table>
+

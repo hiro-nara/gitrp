@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Staff no:</strong>
+  <%= @staff.staff_no %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @staff.name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @staff.department %>
+</p>
+
+<p>
+  <strong>Dep 1st:</strong>
+  <%= @staff.dep_1st %>
+</p>
+
+<p>
+  <strong>Dep 2nd:</strong>
+  <%= @staff.dep_2nd %>
+</p>
+
+<p>
+  <strong>Dep 3rd:</strong>
+  <%= @staff.dep_3rd %>
+</p>
+
+<p>
+  <strong>Dep bunshitsu:</strong>
+  <%= @staff.dep_bunshitsu %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @staff.position %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @staff.email %>
+</p>
+
+<%= link_to 'Edit', edit_staff_path(@staff) %> |
+<%= link_to 'Back', staffs_path %>

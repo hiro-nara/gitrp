@@ -1,0 +1,214 @@
+
+<% ct = 0 %>
+<% obtype = ["顧<br>客","育<br>成","組<br>織"] %>
+<% arr_difficulty = ["","H","M","L"] %>
+<% arr_evaluation = ["","◎","〇","△","▲"] %>
+<% arr_weight = ["","5%","10%","15%","20%","25%","30%"] %>
+
+<% arr_title = [
+    ["リストから選択",
+     "徹底的に差別化を追及せよ",
+     "お客様の期待を凌駕するサービスを提供せよ"],
+    ["リストから選択",
+     "自らのスキル向上に自らが取り組め、組織は業務を通じて人を育てよ",
+     "上司・年配者は率先垂範し、自らの背中で語れ"],
+] %>
+
+<br>
+<table>
+    <tbody>
+        <tr style = "border-top-style: hidden; border-left-style: hidden;">
+            <td style="border-right-style: hidden; width: 20px;"></td>
+            <td style="border-right-style: hidden; width: 20px;"></td>
+            <td style="border-right-style: hidden; width: 20px;"></td>
+            <td style="border-right-style: hidden; width:300px;"></td>
+            <td style="border-right-style: hidden; width: 40px;"></td>
+            <td style="border-right-style: hidden; width: 40px;"></td>
+            <td style="border-right-style: hidden; width: 40px;"></td>
+            <td style="border-right-style: hidden; width:200px;"></td>
+            <td style="border-right-style: hidden; width: 40px;"></td>
+            <td style="border-right-style: hidden; width: 40px;"></td>
+            <td style="border-right-style: hidden; width: 40px;"></td>
+            <td style="border-right-style: hidden; width:200px;"></td>
+        </tr>
+        <tr>
+            <th colspan="7">期首に設定する内容</th>
+            <th colspan="2">期首の結果内容（期末）</th>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <th colspan="4">今期求めるもの</th>
+            <th>難易度</th>
+            <th colspan="2">ウェイト</th>
+            <th>遂行結果</th>
+            <th>自己評価</th>
+            <th>上長評価</th>
+            <th>ポイント</th>
+            <th>遂行結果確認・補足事項記入欄 <br> 評価者記入</th>
+        </tr>
+
+      <%= form.fields_for :objectives do |ob| %>
+      <%= ob.hidden_field(:id) %>
+
+        <tr>
+          <% if ct == 0  then %>
+            <th rowspan="6">ハ<br>ッ<br>ピ<br>｜<br>ト<br>ル<br>ネ<br>｜<br>ド</th>
+          <% end %>
+          <% if ct <= 2  then %>
+            <th rowspan="2"><%= obtype[ct].html_safe %></th>
+            <th rowspan="2"> </th>
+          <% elsif ct == 3 then %>
+            <th rowspan="10" colspan="3"> 通常業務</th>
+          <% end %>
+
+        <%# タイトル %>
+            <td colspan="3" style="height: 10px;" class = "ob">
+              <% if ct <= 1 then %>
+                <% if @fix == true %>
+                  <%= @sheet.objectives[ct].titel %>
+                <% else %>
+                  <%= ob.select(:titel, arr_title[ct],
+                    {},
+                    {:class => "fit"}
+                  ) %>
+                <% end %>
+
+              <% elsif %>
+                <%= ob.text_field(
+                    :titel,
+                    :value => @sheet.objectives[ct].titel,
+                    :disabled => @fix,
+                    ) %>
+              <% end %>
+            </td>
+
+            <td rowspan="2"></td> <%# ウェイトの説明 %>
+
+        <%# 遂行結果 %>
+            <td class="txt" rowspan="2">
+              <%= ob.text_area(
+                :consequence,
+                :value => @sheet.objectives[ct].consequence,
+                :disabled => @fix ) %>
+            </td>
+
+        <%# 自己評価 %>
+            <td rowspan="2" style = "text-align:center;" >
+              <% if @fix == true %>
+                <%= @sheet.objectives[ct].self_evaluation %>
+              <% else %>
+                <%= ob.select( :self_evaluation, arr_evaluation,
+                    :value => @sheet.objectives[ct].self_evaluation ) %>
+              <% end %>
+            </td>
+
+        <%# 上長評価 %>
+            <td rowspan="2" style = "text-align:center;" >
+              <% if @fix == true %>
+                <%= @sheet.objectives[ct].primary_evaluation %>
+              <% else %>
+                <%= ob.select( :primary_evaluation, arr_evaluation,
+                  {:value => @sheet.objectives[ct].primary_evaluation},
+                  {:class => ("e" + ct.to_s),}
+                ) %>
+              <% end %>
+            </td>
+
+        <%# ポイント %>
+            <td rowspan="2" class="point">
+              <%= ob.text_field(
+                    :point,
+                    :value => @sheet.objectives[ct].point,
+                    :disabled => @fix,
+                    :style => "text-align:center;" ,
+                    :class => "point_field",
+                    :id => ("p" + ct.to_s) ) %>
+            </td>
+
+        <%# 遂行結果 評価者記入 %>
+            <td class="txt" rowspan="2">
+              <%= ob.text_area(
+                :consequence_evaluator,
+                :value => @sheet.objectives[ct].consequence_evaluator,
+                :disabled => @fix ) %>
+            </td>
+        </tr>
+        <tr>
+        <%# 内容 %>
+            <td class="txt" class = "ob">
+              <%= ob.text_area(
+                :content,
+                :value => @sheet.objectives[ct].content,
+                :disabled => @fix ) %>
+            </td>
+
+        <%# 難易度 %>
+            <td style = "text-align:center;" >
+
+              <% if @fix == true %>
+                <%= @sheet.objectives[ct].difficulty %>
+              <% else %>
+                <%= ob.select(
+                  :difficulty,
+                  arr_difficulty,
+                  {:value => @sheet.objectives[ct].difficulty,},
+                  {:class => ("d" + ct.to_s)}
+                  ) %>
+              <% end %>
+            </td>
+
+        <%# ウェイト %>
+            <td style = "text-align:center;" >
+              <% if @fix == true %>
+                <%= @sheet.objectives[ct].weight %>
+              <% else %>
+                <%= ob.select(
+                      :weight,
+                      ["",5,10,15,20,25,30],
+                      {},
+                      { :value => @sheet.objectives[ct].weight,
+                        :disabled => @fix,
+                        :class => "weight",
+                      :id => ("w" + ct.to_s)}) %>
+              <% end %>
+            </td>
+
+        </tr>
+        <%# 繰り返し完了 %>
+      <% if ct == 7 %>
+        <tr>
+            <td colspan="3"></td>
+            <td></td>
+            <th>合計</th>
+            <td><%# ウェイト合計 %>
+              <%= form.text_field(
+                :total_point,
+                :value => @sheet.total_point,
+                :disabled => @fix,
+                :style => "text-align:center;" ,
+                :id  => "weight_total") %>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th style="height:40px">合計</th>
+
+        <%# ポイント合計 %>
+            <td>
+              <%= form.text_field(
+                :total_point,
+                :value => @sheet.total_point,
+                :disabled => @fix,
+                :style => "text-align:center;" ,
+                :id => ("point_total") ) %>
+            </td>
+            <td></td>
+        </tr>
+      <% end %>
+
+      <% ct += 1 %>
+      <% end %>  <%# 繰り返し完了 %>
+    </tbody>
+
+
+</table>

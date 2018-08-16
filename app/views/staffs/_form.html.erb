@@ -1,0 +1,72 @@
+<%= form_with(model: staff, local: true) do |form| %>
+  <% if staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
+
+      <ul>
+      <% staff.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :staff_no %>
+    <%= form.text_field :staff_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department %>
+    <%= form.text_field :department %>
+  </div>
+
+  <div class="field">
+    <%= form.label "等級" %>
+    <%= form.text_field :tokyu %>
+  </div>
+
+  <div class="field">
+    <%= form.label "grade" %>
+    <%= form.text_field :grade %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dep_1st %>
+    <%= form.text_field :dep_1st %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dep_2nd %>
+    <%= form.text_field :dep_2nd %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dep_3rd %>
+    <%= form.text_field :dep_3rd %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dep_bunshitsu %>
+    <%= form.text_field :dep_bunshitsu %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position %>
+    <%= form.text_field :position %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

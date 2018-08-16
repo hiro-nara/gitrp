@@ -1,0 +1,75 @@
+<h1>業績目標管理システム</h1>
+
+<p><%= @user.dep_1st %> &nbsp;
+   <%= @user.dep_2nd %> &nbsp;
+   <%= @user.dep_3rd %>
+</p>
+
+<p><%= @user.dep_bunshitsu %> &nbsp;
+   <%= @user.position %>
+</p>
+<p><%= @user.staff_no %>&nbsp;&nbsp; <%= @user.name %></p>
+
+<%
+ mysheet=[]
+ mysheet << @zenki_sheet.where('author_id == ?', @user.id ).first
+ mysheet << @konki_sheet.where('author_id == ?', @user.id ).first
+%>
+
+■前期の業績目標シート ( <%= @season[0].nen_ki%> )
+<% if mysheet[0].nil? %>
+<%= "------" %>
+<% else %>
+<%= link_to(mysheet[0].status, ("/po_sheets/show/" + mysheet[0].id.to_s) ) %>
+<% end %>
+<br>
+■今期の業績目標シート ( <%= @season[1].nen_ki%> )
+<% if mysheet[1].nil? %>
+<%= "------" %>
+<% else %>
+<%= link_to(mysheet[1].status, ("/po_sheets/show/" + mysheet[1].id.to_s) ) %>
+<% end %>
+
+<p>■あなたの配下の業績目標シート</p>
+<% @haika = Staff.where("position = ? and dep_bunshitsu = ? ", "一般", @user.dep_bunshitsu)  %>
+
+<table>
+<tbody>
+  <tr>
+    <th>氏名</th>
+    <th>前期<br><%=@season[0].nen_ki%></th>
+    <th>今期<br><%=@season[1].nen_ki%></th>
+  </tr>
+
+  <% ct = 0 ; hks=[] %>
+  <% @haika.each do |hk| %>
+      <%
+         hks << @zenki_sheet.where('author_id == ?', hk.id ).first
+         hks << @konki_sheet.where('author_id == ?', hk.id ).first
+      %>
+
+    <tr>
+      <td class="m"><%=  hk.name %> <br> </td>
+      <td class="m">
+       <%=hks[ct].nil? ? "---"   :
+        link_to(hks[ct].status, ("/po_sheets/show/" + hks[ct].id.to_s) ) %>
+      </td>
+      <td class="m">
+       <%=hks[ct+1].nil? ? "---" :
+        link_to(hks[ct + 1].status, ("/po_sheets/show/" + hks[ct + 1].id.to_s) ) %>
+      </td>
+    </tr>
+  <% ct  += 2 %>
+  <% end %>
+
+</table>
+</tbody>
+
+
+
+<%#= form_tag(controller: "sheet_manage", action: "create_all") do submit_tag("じっこう") end%>
+
+<hr>
+<div><%= link_to 'ログアウト', destroy_account_session_path, method: :delete %></div>
+
+

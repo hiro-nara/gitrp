@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  season_index: 1
+  year: 1
+  period: MyString
+  nen_ki: MyString
+  hyouki: MyString
+
+two:
+  season_index: 1
+  year: 1
+  period: MyString
+  nen_ki: MyString
+  hyouki: MyString

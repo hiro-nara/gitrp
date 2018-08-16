@@ -1,0 +1,39 @@
+<h1>PoSheets#index</h1>
+
+
+<br>
+
+<table>
+<% @data.each do |obj| %>
+<tr>
+  <td><%= obj.id %>---</td>
+  <td><%= obj.year %>---</td>
+  <td><%= obj.period %>---</td>
+  <td><%= obj.notices %>---</td>
+
+  <% obj.objectives.each do |j| %>
+  <td><%=  j.id %></td>
+  <% end %>
+
+</tr>
+<% end %>
+
+</table>
+
+<br>
+
+<table>
+<% @dataobj.each do |obj| %>
+<tr>
+  <td><%= obj.id %> </td>
+  <td>--<%= obj.content %> --</td>
+</tr>
+
+<% end %>
+</table>
+
+
+<p>
+<a href="/po_sheets/create">create</a>
+</p>
+<a href="/po_sheets/del">delete</a>

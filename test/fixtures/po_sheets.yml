@@ -1,0 +1,53 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  season_index: 1
+  type: 
+  year: 1
+  period: MyString
+  tokyu: MyString
+  grade: 1
+  grade_c: 1
+  grade_reason: MyText
+  position: MyString
+  department: MyString
+  department_c: MyString
+  notices: MyText
+  sales_plan: 1
+  profit_plan: 1
+  sales_result: 1
+  profit_result: 1
+  total_point: 1
+  zone_primary: MyString
+  zone_secondary: MyString
+  author_id: 1
+  primary_evaluator_id: 1
+  secondary_evaluator_id: 1
+  objective_id: 1
+
+two:
+  status: MyString
+  season_index: 1
+  type: 
+  year: 1
+  period: MyString
+  tokyu: MyString
+  grade: 1
+  grade_c: 1
+  grade_reason: MyText
+  position: MyString
+  department: MyString
+  department_c: MyString
+  notices: MyText
+  sales_plan: 1
+  profit_plan: 1
+  sales_result: 1
+  profit_result: 1
+  total_point: 1
+  zone_primary: MyString
+  zone_secondary: MyString
+  author_id: 1
+  primary_evaluator_id: 1
+  secondary_evaluator_id: 1
+  objective_id: 1

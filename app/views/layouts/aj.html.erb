@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>業績目標管理シート</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<script>
+
+function keisu(sel_p,sel_r,pro_p,pro_r){
+  var keisu_p;
+  var sel_sai;
+  var pro_sai;
+  var sel_rate;
+  var pro_rate;
+  var sel_pt;
+  var pro_pt;
+  sel_sai = sel_r - sel_p;
+  pro_sai = pro_r - pro_p;
+  sel_rate = Math.ceil(sel_r * 100 / sel_p);
+  pro_rate = Math.ceil(pro_r * 100 / pro_p);
+  sel_pt = keisu_point(sel_rate);
+  pro_pt = keisu_point(pro_rate);
+
+  if(sel_r > 0){
+    $("#sel_sai").text(sel_sai);
+    $("#sel_rate").text(sel_rate);
+    $("#sel_pt").text(sel_pt);
+  };
+
+  if(pro_r > 0){
+    $("#pro_sai").text(pro_sai);
+    $("#pro_rate").text(pro_rate);
+    $("#pro_pt").text(pro_pt);
+  };
+};
+
+function keisu_point(tmp){
+  if(tmp >= 130 ){return 200 ;
+  }else if(tmp >= 120){
+    return 142 ;
+  }else if(tmp >= 110){
+    return 120 ;
+  }else if(tmp >= 105){return 110 ;
+  }else if(tmp >= 100){return 100 ;
+  }else if(tmp >= 95 ){return 80 ;
+  }else if(tmp >= 90 ){return 66 ;
+  }else if(tmp >= 80 ){return 56 ;
+  }else if(tmp >= 0  ){return 22 ; };
+};
+
+function point(difi, wei, ev){
+  var pt;
+  pt = parseInt(0 + wei);
+  if(ev == ""){
+      return "";
+
+  }else{
+    switch(difi){
+      case "H":
+        pt *= 1.2; break;
+      case "M":
+        break;
+      case "L":
+        pt *= 0.8; break;
+      case "":
+        pt =0; break;
+    };
+
+    switch(ev){
+      case "◎":
+        pt = pt * 12 / 10; break;
+      case "〇":
+        break;
+      case "△":
+        pt *= 0.5; break;
+      case "▲":
+        pt = 0; break;
+    };
+    return pt;
+  }
+};
+
+$(document).on('change load', function(event) {
+
+  $("#p0").val( point( $(".d0").val(), $("#w0").val(), $(".e0").val() ));
+  $("#p1").val( point( $(".d1").val(), $("#w1").val(), $(".e1").val() ));
+  $("#p2").val( point( $(".d2").val(), $("#w2").val(), $(".e2").val() ));
+  $("#p3").val( point( $(".d3").val(), $("#w3").val(), $(".e3").val() ));
+  $("#p4").val( point( $(".d4").val(), $("#w4").val(), $(".e4").val() ));
+  $("#p5").val( point( $(".d5").val(), $("#w5").val(), $(".e5").val() ));
+  $("#p6").val( point( $(".d6").val(), $("#w6").val(), $(".e6").val() ));
+  $("#p7").val( point( $(".d7").val(), $("#w7").val(), $(".e7").val() ));
+
+  var ref ;
+  ref = 0 ;
+  $(".weight").each(function(){
+    var tmp2;
+    tmp2 = parseInt(0 + $(this).val());
+    ref += tmp2;
+  });
+  $("#weight_total").val(ref)
+
+  var tmp;
+  tmp = 0;
+  $(".point_field").each(function(){
+    tmp += parseInt(0 + $(this).val() );
+  });
+
+  $("#point_total").val(tmp);
+  console.log(tmp);
+
+  $("#zone_primary").val(function(){
+    if(tmp >= 120 ){
+      return "1z" ;
+    }else if(tmp >= 110){
+      return "2z" ;
+    }else if(tmp >= 96){
+        return "3z" ;
+    }else if(tmp >= 71){
+        return "4z" ;
+    }else if(tmp >= 1){
+        return "5z" ;
+    }else if(tmp == 0){
+        return "" ;
+    };
+
+  } )
+
+  keisu(
+    parseInt(0 + $("#sel_p").val()),
+    parseInt(0 + $("#sel_r").val()),
+    parseInt(0 + $("#pro_p").val()),
+    parseInt(0 + $("#pro_r").val()),
+  );
+
+} );
+
+
+<!--エンター押下によるsubmit無効化-->
+$(function() {
+  $(document).on("keypress", "input:not(.allow_submit)", function(event) {
+    return event.which !== 13;
+  });
+});
+
+
+</script>
+
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

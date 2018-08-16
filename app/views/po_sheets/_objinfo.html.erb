@@ -1,0 +1,133 @@
+<table>
+    <tbody>
+            <tr>
+                <td style="width: 20px;"></td>
+                <td style="width: 20px;"></td>
+                <td style="width: 20px;"></td>
+                <td style="width:300px;"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="width:200px;"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>    
+            <tr>
+                <th colspan="7">期首に設定する内容</th>
+                <th colspan="2">期首の結果内容（期末）</th>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <th colspan="4">今期求めるもの</th>
+                <th>難易度</th>
+                <th colspan="2">ウェイト</th>
+                <th>遂行結果</th>
+                <th>自己評価</th>
+                <th>上長評価</th>
+                <th>ポイント</th>
+                <th>遂行結果確認・補足事項記入欄 <br> 評価者記入</th>
+            </tr>
+
+            <%= 3.times do |k| %>
+                <tr>
+                    <th> </th>
+                    <th rowspan="2">顧<br>客</th>
+                    <th rowspan="2">必<br>須<br>入<br>力</th>
+                    <td colspan="3"> </td>
+                    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="txt"></td>
+                    <td><%= ob.text_field(:content, :value => @sheet.objectives[k].content, :disabled => @fix) %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                
+            <% end %> 
+            
+            <tr>
+                <th colspan="3" rowspan="5">通常業務</th>
+                <td class="txt"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+    </tbody>
+    
+</table>

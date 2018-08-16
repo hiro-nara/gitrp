@@ -1,0 +1,46 @@
+<br>
+<table align="right" style = "width: 90%">
+	<tbody>
+		<tr>
+			<th rowspan="3" style="width:40px;">一次<br>評価者</th>
+			<td rowspan="3" style="width:40px;">
+				<%= form.text_field(
+					:zone_primary,
+					:value => @sheet.zone_primary,
+					:disabled => @fix,
+					:style => "text-align:center;" ,
+					:id => ("zone_primary")) %>
+			</td>
+			<th colspan="2">一次評価者</th>
+		</tr>
+		<tr>
+			<th style = "width:50px;">社員番号</th>
+			<td style = "width:150px;">
+			<%= @sheet.primary_evaluator.staff_no %></td>
+		</tr>
+		<tr>
+			<th>氏名</th>
+			<td><%=@sheet.primary_evaluator.name %></td>
+		</tr>
+		<tr>
+			<th rowspan="3">二次<br>評価者</th>
+			<td rowspan="3">
+				<%= form.text_field(
+					:zone_secondary,
+					:value => @sheet.zone_secondary,
+					:disabled => @fix,
+					:style => "text-align:center;" ,
+					:id => ("zone_secondary")) %>
+			</td>
+			<th colspan="2">二次評価者(修正がある場合のみ)</th>
+		</tr>
+		<tr>
+			<th>社員番号</th>
+			<td><%=@sheet.secondary_evaluator.staff_no%></td>
+		</tr>
+		<tr>
+			<th>氏名</th>
+			<td><%=@sheet.secondary_evaluator.name %></td>
+		</tr>
+	</tbody>
+</table>

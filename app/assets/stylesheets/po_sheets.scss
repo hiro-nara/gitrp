@@ -1,0 +1,88 @@
+// Place all the styles related to the po_sheets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+table , td, th {
+	border: 1px solid #595959;
+    border-collapse: collapse;
+    margin: 0px;
+    padding-bottom: 0px;
+}
+td, th {
+    font-size: 12px;
+    height: 10px;
+    padding-bottom: 0px;
+}
+th {
+    background: #f0e6cc;
+    padding-bottom: 0px;
+}
+
+td.txt {
+    height:  50px;
+}
+
+td.ob, th.ob {
+    padding: 0px;
+    padding-bottom: 0px;
+
+}
+td.m, th.m {
+    padding: 2px;
+}
+
+table.pos, tr.pos, td.pos {
+    border-style: none;
+}
+
+td.hd {
+    padding-bottom: 0px;
+}
+
+td.center {
+    width: 20px;
+    text-align:center;
+    padding-bottom: 0px;
+}
+input{
+    padding: 0px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+input[type="text"] {
+    border-style: none;
+    width: 100%;
+    height: 100%;
+    background:  ivory;
+}
+input[disabled]{
+    background:  rgb(255, 255, 255);
+}
+
+select {
+    text-align:center;
+}
+
+select.fit {
+    width: 100%;
+    height: 100%;
+}
+
+textarea {
+    resize: none;
+    border-style: none;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    line-height: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    background:  ivory;
+}
+
+
+textarea[disabled] {
+    background:  rgb(255, 255, 255);
+}

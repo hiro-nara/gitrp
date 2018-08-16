@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titel: MyString
+  content: MyText
+  criteria_1: MyText
+  criteria_2: MyText
+  criteria_3: MyText
+  criteria_4: MyText
+  difficulty: MyString
+  weight: 1
+  consequence: MyText
+  consequence_evaluator: MyText
+  self_evaluation: MyString
+  primary_evaluation: MyString
+  secondary_evaluation: MyString
+  point: 1
+
+two:
+  titel: MyString
+  content: MyText
+  criteria_1: MyText
+  criteria_2: MyText
+  criteria_3: MyText
+  criteria_4: MyText
+  difficulty: MyString
+  weight: 1
+  consequence: MyText
+  consequence_evaluator: MyText
+  self_evaluation: MyString
+  primary_evaluation: MyString
+  secondary_evaluation: MyString
+  point: 1

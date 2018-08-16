@@ -1,0 +1,37 @@
+
+<br>
+<table style = "table-layout: fixed;">
+
+    <tbody>
+        <tr>
+            <th class="hd" style="width: 50px;">期</th>
+            <td class="center">
+              <%= @sheet.year %> </td>
+
+            <th class="hd" style="width: 40px;" >上・下</th>
+            <td class="center"><%= @sheet.period %></td>
+            <td colspan="2">   </td>
+        </tr>
+        <tr>
+            <th class="hd">等級</th>
+            <td class="center"><%=@sheet.tokyu %></td>
+
+            <th class="hd">ｸﾞﾚｰﾄﾞ</th>
+            <td class="center"><%=@sheet.grade %></td>
+
+            <th class="hd" style="width:30px;">役職</th>
+            <td style="width:200px;"><%= @sheet.position %></td>
+        </tr>
+        <tr>
+            <th class="hd">目標時点<br>の所属</th>
+            <td colspan="5"><%= @sheet.department %></td>
+        </tr>
+        <tr>
+            <th class="hd">社員番号</th>
+            <td colspan="2"><%= @sheet.author.staff_no %> </td>
+
+            <th style="width:30px;">氏名</th>
+            <td colspan="2"><%= @sheet.author.name %> </td>
+        </tr>
+    </tbody>
+</table>

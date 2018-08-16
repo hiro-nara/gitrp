@@ -1,0 +1,81 @@
+<br>
+<table>
+    <tbody>
+    <tr>
+        <th rowspan="4" style="width: 20px;">計<br>数<br>計<br>画</th>
+        <th></th>
+        <th></th>
+        <th style="width: 40px;">計画</th>
+        <th style="width: 40px;">実績</th>
+        <th>差異</th>
+        <th>達成率</th>
+        <th>係数</th>
+        <th>係数計画<br>ウェイト</th>
+    </tr>
+    <tr>
+        <th>入力不要</th>
+        <th>受注</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td rowspan="3" style="text-align:center;">50%</td>
+    </tr>
+    <tr id="sales">
+        <th>必須入力</th>
+        <th>売上</th>
+      <%#売り上げ計画 %>
+        <td>
+            <%= form.text_field(
+                :sales_plan,
+                :value => @sheet.sales_plan,
+                :disabled => @fix,
+                :id => "sel_p",
+            ) %>
+        </td>
+
+      <%#売り上げ実績 %>
+        <td>
+            <%= form.text_field(
+                :sales_result,
+                :value => @sheet.sales_result,
+                :disabled => @fix,
+                :id => "sel_r",
+            ) %>
+        </td>
+      <%#売り上げ差異 %>
+        <td><div id = "sel_sai"></div></td>
+
+      <%#売り上げ達成率 %>
+        <td><div id="sel_rate"></div></td>
+
+      <%#売り上げ計数 %>
+        <td><div id="sel_pt"></div></td>
+    </tr>
+    <tr id="profit">
+        <th>必須入力</th>
+        <th>利益</th>
+        <td>
+            <%= form.text_field(
+                :profit_plan,
+                :value => @sheet.profit_plan,
+                :disabled => @fix,
+                :id => "pro_p",
+            ) %>
+        </td>
+        <td>
+            <%= form.text_field(
+                :sales_result,
+                :value => @sheet.sales_result,
+                :disabled => @fix,
+                :id => "pro_r",
+            ) %>
+        </td>
+        <td><div id="pro_sai"></div></td>
+        <td><div id="pro_rate"></div></td>
+        <td><div id="pro_pt"></div></td>
+    </tr>
+    </tbody>
+</table>
+<br>
